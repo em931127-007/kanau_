@@ -202,54 +202,104 @@
                 
                 <div class="flex justify-center flex-wrap gap-3 mb-12">
                     <button class="category-tab active px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('all')">全部品項</button>
+                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('cofe')">經典咖啡</button>
                     <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('drink')">經典飲品</button>
-                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('main')">特製主食</button>
+                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('main')">特製鹹食</button>
                     <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('dessert')">手作甜點</button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8" id="menu-container">
-                    <!-- 飲品 -->
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <!-- 咖啡 -->
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Americano / 經典美式</h4>   
                             <p class="text-xs text-stone-400">特選中深焙配方豆，帶有堅果與焦糖香氣</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$180</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Sicily Lemon Coffee / 西西里檸檬咖啡</h4>
                             <p class="text-xs text-stone-400">新鮮檸檬原汁與美式黑咖啡的清爽酸甜碰撞</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Orange Americano / 橘橙美式</h4>   
                             <p class="text-xs text-stone-400">初搾柳橙原汁融入美式，雙重果香與溫潤尾韻</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Passion Fruit Americano / 百香美式</h4>   
                             <p class="text-xs text-stone-400">微酸百香果粒搭配氣泡水與濃縮咖啡，層次感豐富</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Latte / 經典拿鐵</h4>   
                             <p class="text-xs text-stone-400">香醇小農鮮乳與濃縮咖啡完美融合，絲滑順口</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$180</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="cofe">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Cappuccino / 卡布奇諾</h4>
                             <p class="text-xs text-stone-400">綿密厚實奶泡，灑上少許肉桂粉，香氣十足</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$120</span>
+                    </div>
+                    <!-- 飲料 -->
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Black tea 紅茶</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$100</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Lemon tea 鮮檸紅茶</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$100</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Pomelo & peach olong tea 蜜柚鮮烏龍</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$110</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Ｍilk tea熟成鮮奶茶</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$140</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Almond milk杏仁牛奶</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$140</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Chocolate可可牛奶</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Matcha milk抹茶拿鐵</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">Hojicha milk焙茶拿鐵</h4>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
                     </div>
 
                     <!-- 主食 -->
@@ -260,6 +310,21 @@
                         </div>
                         <span class="serif font-bold text-amber-800">$180</span>
                     </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="main">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">手撕雞肉塔可</h4>
+                            <p class="text-xs text-stone-400">嚴選優質肌肉、搭配特製塔可皮</p>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$180</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="main">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-stone-800">胡麻風味蘆筍塔可</h4>
+                            <p class="text-xs text-stone-400">奶油蒜炒鮮蝦、焙煎胡麻、新鮮盧筍、蕃茄塔塔醬</p>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$180</span>
+                    </div>
+
 
                     <!-- 甜點 -->
                     <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
@@ -271,6 +336,38 @@
                             <p class="text-xs text-stone-400">輕盈的杏仁蛋白酥、綿密卡士達鮮奶油與新鮮草莓</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$200</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-bold text-stone-800">芒果檸檬蜜糖吐司</h4>
+                            </div>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-bold text-stone-800">泰奶巴斯克</h4>
+                            </div>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-bold text-stone-800">巧克力棉花糖可頌</h4>
+                            </div>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
+                    </div>
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-bold text-stone-800">芒果檸檬蜜糖吐司</h4>
+                            </div>
+                        </div>
+                        <span class="serif font-bold text-amber-800">$150</span>
                     </div>
                 </div>
 
