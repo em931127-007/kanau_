@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>卡那屋 | KanaU Cafe - 官方網站</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         
         :root {
             --brand-brown: #5d4037;
@@ -41,7 +42,9 @@
             position: relative;
             padding-bottom: 2px;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
+        
         .nav-link::after {
             content: '';
             position: absolute;
@@ -50,15 +53,17 @@
             bottom: -4px;
             left: 0;
             background-color: var(--brand-gold);
-            transition: width 0.3s;
+            transition: width 0.3s ease;
         }
+        
         .nav-link:hover::after, .nav-active::after {
             width: 100%;
         }
 
         .category-tab {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
+        
         .category-tab.active {
             background-color: var(--brand-brown);
             color: white;
@@ -71,7 +76,7 @@
             border: 1px solid rgba(93, 64, 55, 0.1);
         }
 
-        /* 隱藏滾動條 */
+        /* Hide scrollbars for slick aesthetics */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -89,12 +94,12 @@
                     </span> 
                     目前營業中
                 </span>
-                <span class="hidden md:inline text-stone-400">|</span>
+                <span class="hidden md:inline text-stone-600">|</span>
                 <span class="hidden md:inline">現場候位：約 2 組 (預估等候 15 分鐘)</span>
-                <span class="hidden lg:inline text-stone-400">|</span>
-                <span class="hidden lg:inline text-amber-300">最新消息：手工美式肉桂捲暖心上市！</span>
+                <span class="hidden lg:inline text-stone-600">|</span>
+                <span class="hidden lg:inline text-amber-300 animate-pulse">最新消息：手工美式肉桂捲暖心上市！</span>
             </div>
-            <div class="flex space-x-5 items-center">
+            <div class="flex space-x-5 items-center font-medium">
                 <button onclick="navigateTo('info')" class="hover:text-amber-300 transition-colors">交通資訊</button>
                 <span class="text-stone-600">/</span>
                 <button onclick="openMemberModal()" class="hover:text-amber-300 transition-colors">會員登入</button>
@@ -112,23 +117,24 @@
             
             <!-- 電腦版選單 -->
             <div class="hidden lg:flex space-x-8 text-sm font-medium">
-                <span onclick="navigateTo('menu')" class="nav-link" id="nav-menu">美味菜單</span>
+                <span onclick="navigateTo('menu')" class="nav-link" id="nav-menu">菜單MENU</span>
                 <span onclick="navigateTo('about')" class="nav-link" id="nav-about">關於我們</span>
-                <span onclick="navigateTo('vibe')" class="nav-link" id="nav-vibe">空間氛圍</span>
+                <span onclick="navigateTo('vibe')" class="nav-link" id="nav-vibe">店內空間</span>
                 <span onclick="navigateTo('info')" class="nav-link" id="nav-info">營業資訊</span>
                 <span onclick="navigateTo('shop')" class="nav-link" id="nav-shop">選物/商品</span>
                 <span onclick="navigateTo('delivery')" class="nav-link" id="nav-delivery">冷凍宅配</span>
             </div>
 
+            <!-- 購物車與漢堡選單按鈕 -->
             <div class="flex items-center space-x-4">
                 <!-- 購物車圖示 -->
-                <button onclick="toggleCartDrawer()" class="relative p-2 text-stone-700 hover:text-amber-700 transition-colors">
+                <button onclick="toggleCartDrawer()" class="relative p-2 text-stone-700 hover:text-amber-700 transition-colors focus:outline-none" aria-label="購物車">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
                     <span id="cart-badge" class="absolute -top-1 -right-1 bg-amber-600 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center scale-90">0</span>
                 </button>
-                <button class="lg:hidden p-1 text-stone-700" onclick="toggleMobileMenu()">
+                <button class="lg:hidden p-1 text-stone-700 focus:outline-none" onclick="toggleMobileMenu()" aria-label="切換選單">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 </button>
             </div>
@@ -136,12 +142,12 @@
         
         <!-- 手機選單 -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-6 flex flex-col space-y-4 text-center shadow-inner">
-            <span onclick="navigateTo('menu')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">美味菜單</span>
-            <span onclick="navigateTo('about')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">關於我們</span>
-            <span onclick="navigateTo('vibe')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">空間氛圍</span>
-            <span onclick="navigateTo('info')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">營業資訊</span>
-            <span onclick="navigateTo('shop')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">選物/商品</span>
-            <span onclick="navigateTo('delivery')" class="py-2 hover:bg-stone-50 rounded cursor-pointer">冷凍宅配</span>
+            <span onclick="navigateTo('menu')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">菜單MENU</span>
+            <span onclick="navigateTo('about')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">關於我們</span>
+            <span onclick="navigateTo('vibe')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">空間氛圍</span>
+            <span onclick="navigateTo('info')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">營業資訊</span>
+            <span onclick="navigateTo('shop')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">選物/商品</span>
+            <span onclick="navigateTo('delivery')" class="py-2 hover:bg-stone-50 rounded cursor-pointer transition-colors block">冷凍宅配</span>
         </div>
     </nav>
 
@@ -151,17 +157,17 @@
         <!-- 0. 首頁 -->
         <section id="page-home" class="page active">
             <div class="relative h-[80vh] flex items-center justify-center overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1920&q=80" alt="卡那屋首頁背景" class="absolute inset-0 w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/40"></div>
+                <img src="https://images.unsplash.com/photo-1780566712335-cae554fab286?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" alt="卡那屋首頁背景" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/45"></div>
                 <div class="relative text-center text-white space-y-6 px-6 max-w-4xl">
-                    <h2 class="text-lg md:text-2xl tracking-[0.4em] font-light text-amber-100">KANA U — 讓人放鬆休息的角落</h2>
-                    <h1 class="text-5xl md:text-8xl serif font-bold leading-tight tracking-wider">卡那屋咖啡廳</h1>
-                    <p class="text-sm md:text-lg font-light tracking-widest max-w-2xl mx-auto opacity-90 leading-relaxed">
-                        「かなう」在日文中是願望成真的意思。<br>在這裡，點一杯職人手沖與手作烘焙，讓日常的小小祈願，在咖啡香中悄悄實現。
+                    <h3 class="text-base md:text-2xl tracking-[0.4em] font-light text-amber-100 uppercase">KANA U — 讓人放鬆休息的角落</h3>
+                    <h2 class="text-4xl md:text-8xl serif font-bold leading-tight tracking-wider">KANAU COFFEE</h2>
+                    <p class="text-xs md:text-lg font-light tracking-widest max-w-2xl mx-auto opacity-95 leading-relaxed">
+                        2021-2026<br>無訂位 採現場制...
                     </p>
-                    <div class="pt-6 flex justify-center gap-4">
-                        <button onclick="navigateTo('menu')" class="px-10 py-3.5 bg-amber-700 hover:bg-amber-800 text-white font-medium tracking-widest rounded transition duration-300 shadow-lg">菜單MENU</button>
-                        <button onclick="navigateTo('delivery')" class="px-10 py-3.5 border border-white hover:bg-white hover:text-stone-950 font-medium tracking-widest rounded transition duration-300">冷凍宅配</button>
+                    <div class="pt-6 flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="navigateTo('menu')" class="px-10 py-3.5 bg-amber-700 hover:bg-amber-800 text-white font-medium tracking-widest rounded-lg transition duration-300 shadow-lg">菜單MENU</button>
+                        <button onclick="navigateTo('delivery')" class="px-10 py-3.5 border border-white hover:bg-white hover:text-stone-950 font-medium tracking-widest rounded-lg transition duration-300">冷凍宅配</button>
                     </div>
                 </div>
             </div>
@@ -169,17 +175,17 @@
             <!-- 首頁精選推廣區 -->
             <div class="max-w-7xl mx-auto py-20 px-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-lg transition duration-300">
                         <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-amber-800 text-2xl font-bold">☕</div>
                         <h3 class="text-xl font-bold serif">職人手作咖啡</h3>
                         <p class="text-sm text-stone-500 leading-relaxed">提供單品美式、西西里、以及特調水果美式，精準調配黃金比例。</p>
                     </div>
-                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-lg transition duration-300">
                         <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-amber-800 text-2xl font-bold">🍰</div>
                         <h3 class="text-xl font-bold serif">招牌冷凍巴斯克</h3>
                         <p class="text-sm text-stone-500 leading-relaxed">低溫熟成，入口即化。提供全台冷凍宅配，在家也能享有滿滿儀式感。</p>
                     </div>
-                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-md transition">
+                    <div class="bg-white p-8 rounded-2xl border border-stone-100 text-center space-y-4 hover:shadow-lg transition duration-300">
                         <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-amber-800 text-2xl font-bold">🐱</div>
                         <h3 class="text-xl font-bold serif">超萌貓咪成員</h3>
                         <p class="text-sm text-stone-500 leading-relaxed">由店長胖虎、店花拿鐵、店帥美式坐鎮，為您的午後帶來最暖心的陪伴。</p>
@@ -188,57 +194,57 @@
             </div>
         </section>
 
-        <!-- 1. 菜單頁 -->
+        <!-- 1. 菜單頁 (純展示) -->
         <section id="page-menu" class="page pt-20 pb-20 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-4xl serif text-center mb-4">品味菜單</h2>
-                <p class="text-stone-400 text-center mb-12 tracking-widest text-sm">MENU</p>
+                <h2 class="text-4xl serif text-center mb-4">菜單MENU</h2>
+                <p class="text-stone-400 text-center mb-12 tracking-widest text-sm uppercase">MENU</p>
                 
                 <div class="flex justify-center flex-wrap gap-3 mb-12">
-                    <button class="category-tab active px-6 py-2 rounded-full border border-stone-200 text-sm" onclick="filterMenu('all')">全部品項</button>
-                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm" onclick="filterMenu('drink')">經典飲品</button>
-                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm" onclick="filterMenu('main')">特製主食</button>
-                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm" onclick="filterMenu('dessert')">手作甜點</button>
+                    <button class="category-tab active px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('all')">全部品項</button>
+                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('drink')">經典飲品</button>
+                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('main')">特製主食</button>
+                    <button class="category-tab px-6 py-2 rounded-full border border-stone-200 text-sm focus:outline-none" onclick="filterMenu('dessert')">手作甜點</button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8" id="menu-container">
                     <!-- 飲品 -->
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Americano / 經典美式</h4>   
                             <p class="text-xs text-stone-400">特選中深焙配方豆，帶有堅果與焦糖香氣</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$180</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Sicily Lemon Coffee / 西西里檸檬咖啡</h4>
                             <p class="text-xs text-stone-400">新鮮檸檬原汁與美式黑咖啡的清爽酸甜碰撞</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Orange Americano / 橘橙美式</h4>   
                             <p class="text-xs text-stone-400">初搾柳橙原汁融入美式，雙重果香與溫潤尾韻</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Passion Fruit Americano / 百香美式</h4>   
                             <p class="text-xs text-stone-400">微酸百香果粒搭配氣泡水與濃縮咖啡，層次感豐富</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$150</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Latte / 經典拿鐵</h4>   
                             <p class="text-xs text-stone-400">香醇小農鮮乳與濃縮咖啡完美融合，絲滑順口</p>
                         </div>
                         <span class="serif font-bold text-amber-800">$180</span>
                     </div>
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="drink">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="drink">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">Cappuccino / 卡布奇諾</h4>
                             <p class="text-xs text-stone-400">綿密厚實奶泡，灑上少許肉桂粉，香氣十足</p>
@@ -247,7 +253,7 @@
                     </div>
 
                     <!-- 主食 -->
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="main">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="main">
                         <div class="space-y-1">
                             <h4 class="font-bold text-stone-800">青蔥櫻桃鴨三明治</h4>
                             <p class="text-xs text-stone-400">嚴選在地優質櫻桃鴨、宜蘭青蔥醬與酥脆巧巴達</p>
@@ -256,11 +262,11 @@
                     </div>
 
                     <!-- 甜點 -->
-                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start" data-category="dessert">
+                    <div class="menu-item p-4 border-b border-stone-200/60 flex justify-between items-start transition-all" data-category="dessert">
                         <div class="space-y-1">
                             <div class="flex items-center space-x-2">
                                 <h4 class="font-bold text-stone-800">草莓挪威蛋糕</h4>
-                                <span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded">今日限量</span>
+                                <span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-medium">今日限量</span>
                             </div>
                             <p class="text-xs text-stone-400">輕盈的杏仁蛋白酥、綿密卡士達鮮奶油與新鮮草莓</p>
                         </div>
@@ -269,7 +275,7 @@
                 </div>
 
                 <!-- 備註客製說明 -->
-                <div class="mt-16 bg-stone-100 p-6 rounded-2xl border border-stone-200/60 text-xs text-stone-500 leading-relaxed">
+                <div class="mt-16 bg-stone-100 p-6 rounded-2xl border border-stone-200/40 text-xs text-stone-500 leading-relaxed">
                     <h5 class="font-bold text-stone-700 text-sm mb-2">💡 飲品客製與貼心備註：</h5>
                     <ul class="space-y-1 list-disc list-inside">
                         <li>本店咖啡飲品皆提供「冷 (Iced) / 熱 (Hot)」調整。</li>
@@ -309,23 +315,23 @@
                         <p class="text-xs tracking-widest text-stone-400 uppercase">Our Cats</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-md transition">
+                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-lg transition duration-300">
                             <div class="aspect-square w-32 h-32 mx-auto bg-stone-200 rounded-full mb-4 overflow-hidden border-2 border-amber-600/30">
-                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=300&q=80" alt="貓咪胖虎" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1780812939146-315692bc37e7?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" alt="貓咪胖虎" class="w-full h-full object-cover">
                             </div>
                             <h4 class="font-bold text-lg text-stone-800">店長：胖虎</h4>
                             <p class="text-xs text-amber-800 mt-1 italic">負責監督咖啡豆烘焙與品質控管</p>
                         </div>
-                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-md transition">
+                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-lg transition duration-300">
                             <div class="aspect-square w-32 h-32 mx-auto bg-stone-200 rounded-full mb-4 overflow-hidden border-2 border-amber-600/30">
-                                <img src="https://images.unsplash.com/photo-1573865526739-10659fef78a1?auto=format&fit=crop&w=300&q=80" alt="貓咪拿鐵" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1780813616322-ce99ce71481a?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" alt="貓咪拿鐵" class="w-full h-full object-cover">
                             </div>
                             <h4 class="font-bold text-lg text-stone-800">店花：拿鐵</h4>
                             <p class="text-xs text-amber-800 mt-1 italic">擅長在午後溫暖陽光下慵懶打盹</p>
                         </div>
-                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-md transition">
+                        <div class="text-center group bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-lg transition duration-300">
                             <div class="aspect-square w-32 h-32 mx-auto bg-stone-200 rounded-full mb-4 overflow-hidden border-2 border-amber-600/30">
-                                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=300&q=80" alt="貓咪美式" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1780814435933-6c980bae6f43?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" alt="貓咪美式" class="w-full h-full object-cover">
                             </div>
                             <h4 class="font-bold text-lg text-stone-800">店帥：美式</h4>
                             <p class="text-xs text-amber-800 mt-1 italic">傲嬌公貓，負責用帥氣顏值征服顧客</p>
@@ -340,10 +346,10 @@
                         <p class="text-xs tracking-widest text-stone-400 uppercase">Our Daily Life</p>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80" alt="手沖日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80" alt="陽光照耀日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=400&q=80" alt="拉花日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80" alt="店角日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden shadow-inner"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80" alt="手沖日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden shadow-inner"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80" alt="陽光照耀日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden shadow-inner"><img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=400&q=80" alt="拉花日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                        <div class="aspect-square bg-stone-100 rounded-xl overflow-hidden shadow-inner"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80" alt="店角日常" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
                     </div>
                 </div>
             </div>
@@ -353,33 +359,42 @@
         <section id="page-vibe" class="page pt-20 pb-20 px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl serif mb-4">空間氛圍</h2>
-                    <p class="text-stone-500">光影、木質與花藝的優雅對話</p>
+                    <h2 class="text-4xl serif mb-4">店內規則</h2>
+                    <p class="text-stone-500">請尊重空間 以及生活在這裡的貓咪</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                     <div class="space-y-6 flex flex-col justify-center">
-                        <h3 class="text-2xl serif border-l-4 border-amber-700 pl-4">氛圍介紹 & 使用情境</h3>
+                        <h3 class="text-2xl serif border-l-4 border-amber-700 pl-4">RULES</h3>
                         <p class="text-stone-600 leading-relaxed text-sm">
-                            卡那屋全店選用溫潤質樸的日系木質傢俱，搭配親切低調的暖黃色微調燈光，窗外則引進了勤美街區最自然的綠意。
+                            門禁管制：大門上鎖，需離開時請告知，勿自行開門。
                         </p>
                         <p class="text-stone-600 leading-relaxed text-sm">
-                            不論您是帶著電腦想專注工作、沉浸在喜愛的書籍中，或是和老朋友在靜謐的角落分享祕密，我們都為您預留了最舒心的角落。
+                            低消規則：每人一杯飲品，甜品和閒時不列入低消。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed text-sm">
+                            時間限制：客滿時段，每組限時90分鐘，加點不續時。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed text-sm">
+                            空間人數限制：空間有限，恕無法接受四人以上團體，人到齊後入座。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed text-sm">
+                            拍攝規則：禁止使用閃光燈/禁止換桌擺拍/禁止干擾他人/禁止未經同意拍攝他人。
+                        </p>
+                        <h3 class="text-2xl serif border-l-4 border-amber-700 pl-4">CATS RULES貓咪規則</h3>
+                        <p class="text-stone-600 leading-relaxed text-sm">
+                            禁止抱貓、餵食、拍打屁股、干擾睡覺。
                         </p>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="h-44 bg-stone-100"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="實木桌子"></div>
-                        <div class="h-44 bg-stone-100"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="靜謐一隅"></div>
-                        <div class="h-44 bg-stone-100"><img src="https://images.unsplash.com/photo-1493857671297-66f1aba6d7d4?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="手調細節"></div>
-                        <div class="h-44 bg-stone-100"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="工作角落"></div>
+                        <div class="h-44 bg-stone-100 overflow-hidden rounded-xl shadow"><img src="https://images.unsplash.com/photo-1780565537834-9b0a0dcac480?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="實木桌子"></div>
+                        <div class="h-44 bg-stone-100 overflow-hidden rounded-xl shadow"><img src="https://images.unsplash.com/photo-1780565537421-a15b178b412b?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="靜謐一隅"></div>
+                        <div class="h-44 bg-stone-100 overflow-hidden rounded-xl shadow"><img src="https://images.unsplash.com/photo-1780565537121-964f68e22f13?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="手調細節"></div>
+                        <div class="h-44 bg-stone-100 overflow-hidden rounded-xl shadow"><img src="https://images.unsplash.com/photo-1780565537129-1437946dd4b5?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D$0" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="工作角落"></div>
                     </div>
                 </div>
 
-                <div class="bg-white p-12 rounded-3xl text-center space-y-6 shadow-sm border border-stone-200/80 max-w-3xl mx-auto">
-                    <h3 class="text-2xl serif text-stone-800">每日一花 — Daily Flower</h3>
-                    <p class="italic text-amber-800 text-lg">今日花語：鬱金香 — 永恆的愛與祝福</p>
-                    <p class="text-xs text-stone-400">我們每天清晨挑選新鮮的花藝點綴空間，帶給每位造訪的客人最新鮮的生機與祝福。</p>
-                </div>
+            
             </div>
         </section>
 
@@ -410,7 +425,7 @@
                             <div class="z-10 bg-white p-5 rounded-xl shadow-lg text-center max-w-xs border border-stone-200">
                                 <p class="font-bold text-sm text-stone-800">📍 卡那屋咖啡廳</p>
                                 <p class="text-[10px] text-stone-400 mt-1">台中市西區民生路123巷8號</p>
-                                <a href="https://maps.google.com" target="_blank" class="inline-block mt-3 bg-amber-800 text-white text-xs px-4 py-2 rounded hover:bg-amber-900 transition-colors">導航 Google Map</a>
+                                <a href="https://maps.google.com" target="_blank" class="inline-block mt-3 bg-amber-800 text-white text-xs px-4 py-2 rounded-lg hover:bg-amber-900 transition-colors">導航 Google Map</a>
                             </div>
                         </div>
 
@@ -462,39 +477,39 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- 商品 1 -->
-                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-md transition">
+                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-lg transition duration-300">
                         <div class="aspect-square bg-stone-100 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1544634076-a196a1f44042?auto=format&fit=crop&w=400&q=80" alt="安全貼紙" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-stone-800 text-white text-[10px] uppercase font-bold py-1 px-2 rounded">熱銷選物</span>
+                            <span class="absolute top-3 left-3 bg-stone-800 text-white text-[10px] uppercase font-bold py-1 px-2 rounded-lg">熱銷選物</span>
                         </div>
                         <div class="p-6 space-y-3">
                             <h4 class="font-bold text-lg text-stone-800">貓咪交通安全貼紙</h4>
                             <p class="text-xs text-stone-400">胖虎、拿鐵及美式的大頭設計！防水、抗UV材質，可貼於機車與安全帽上。</p>
                             <div class="flex justify-between items-center pt-2">
                                 <span class="serif font-bold text-xl text-amber-800">$120</span>
-                                <button onclick="addToCart('貓咪交通安全貼紙', 120)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded hover:bg-amber-800 transition shadow">加入購物車</button>
+                                <button onclick="addToCart('貓咪交通安全貼紙', 120)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded-lg hover:bg-amber-800 transition shadow">加入購物車</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- 商品 2 -->
-                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-md transition">
+                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-lg transition duration-300">
                         <div class="aspect-square bg-stone-100 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=400&q=80" alt="手繪春聯" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] uppercase font-bold py-1 px-2 rounded">春節限定</span>
+                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] uppercase font-bold py-1 px-2 rounded-lg">春節限定</span>
                         </div>
                         <div class="p-6 space-y-3">
                             <h4 class="font-bold text-lg text-stone-800">手繪貓咪春聯</h4>
                             <p class="text-xs text-stone-400">純手工手繪「貓肥人富」新春對聯。滿滿童趣！單筆滿 400 元即隨單附贈一張。</p>
                             <div class="flex justify-between items-center pt-2">
                                 <span class="serif font-bold text-xl text-amber-800">$100</span>
-                                <button onclick="addToCart('手繪貓咪春聯', 100)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded hover:bg-amber-800 transition shadow">加入購物車</button>
+                                <button onclick="addToCart('手繪貓咪春聯', 100)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded-lg hover:bg-amber-800 transition shadow">加入購物車</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- 商品 3 -->
-                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-md transition">
+                    <div class="group bg-white rounded-2xl border border-stone-100 overflow-hidden hover:shadow-lg transition duration-300">
                         <div class="aspect-square bg-stone-100 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1582234372722-50d7ccc30e51?auto=format&fit=crop&w=400&q=80" alt="濾杯" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -503,7 +518,7 @@
                             <p class="text-xs text-stone-400">專用陶瓷三孔濾杯＋高透玻璃分享壺組。萃取穩定，在家也是手沖職人。</p>
                             <div class="flex justify-between items-center pt-2">
                                 <span class="serif font-bold text-xl text-amber-800">$1,200</span>
-                                <button onclick="addToCart('日系極簡濾杯組', 1200)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded hover:bg-amber-800 transition shadow">加入購物車</button>
+                                <button onclick="addToCart('日系極簡濾杯組', 1200)" class="bg-amber-700 text-white px-4 py-2 text-xs rounded-lg hover:bg-amber-800 transition shadow">加入購物車</button>
                             </div>
                         </div>
                     </div>
@@ -521,7 +536,7 @@
             </div>
         </section>
 
-        <!-- 6. 宅配訂購 -->
+        <!-- 6. 冷凍宅配 -->
         <section id="page-delivery" class="page pt-20 pb-20 px-6">
             <div class="max-w-4xl mx-auto space-y-16">
                 
@@ -533,8 +548,8 @@
                 <!-- 招牌巴斯克展示 -->
                 <div class="bg-stone-800 text-white p-8 md:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-12 shadow-xl border border-stone-700">
                     <div class="md:w-1/2 space-y-6">
-                        <span class="inline-block bg-amber-600 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wider">招牌人氣 No.1</span>
-                        <h2 class="text-4xl serif">冷凍熟成巴斯克</h2>
+                        <span class="inline-block bg-amber-600 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">招牌人氣 No.1</span>
+                        <h2 class="text-4xl serif leading-tight">冷凍熟成巴斯克</h2>
                         <p class="text-stone-300 text-sm leading-relaxed">
                             卡那屋極受歡迎的重乳酪巴斯克。高溫焦化烤焙、急速低溫熟成，入口時如同冰淇淋般綿密。
                         </p>
@@ -591,9 +606,9 @@
             <div>
                 <h5 class="font-bold text-sm mb-6 text-white uppercase tracking-widest">社群追蹤</h5>
                 <div class="flex space-x-3">
-                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition">IG</a>
-                    <a href="https://facebook.com" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition">FB</a>
-                    <a href="https://line.me" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition">Line</a>
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition text-xs font-semibold">IG</a>
+                    <a href="https://facebook.com" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition text-xs font-semibold">FB</a>
+                    <a href="https://line.me" target="_blank" class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center hover:bg-stone-700 hover:text-white transition text-xs font-semibold">Line</a>
                 </div>
             </div>
             <div>
@@ -614,7 +629,7 @@
     <!-- 全域購物車側邊欄 (Cart Drawer) -->
     <div id="cart-drawer" class="fixed inset-0 z-[100] hidden">
         <!-- 遮罩背景 -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-xs" onclick="toggleCartDrawer()"></div>
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleCartDrawer()"></div>
         <!-- 抽屜本體 -->
         <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-white shadow-2xl p-6 flex flex-col justify-between">
             <div>
@@ -623,7 +638,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                         購物清單
                     </h3>
-                    <button onclick="toggleCartDrawer()" class="p-2 text-stone-400 hover:text-stone-700">
+                    <button onclick="toggleCartDrawer()" class="p-2 text-stone-400 hover:text-stone-700 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
@@ -657,9 +672,9 @@
     </div>
 
     <!-- 結帳資訊 Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-[110] bg-black/60 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+    <div id="checkout-modal" class="fixed inset-0 z-[110] bg-black/60 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white max-w-lg w-full rounded-2xl p-8 shadow-2xl relative">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <h3 class="text-2xl serif mb-2 text-stone-800">配送結帳資訊</h3>
@@ -697,9 +712,9 @@
     </div>
 
     <!-- 會員登入 Modal -->
-    <div id="member-modal" class="fixed inset-0 z-[110] bg-black/60 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+    <div id="member-modal" class="fixed inset-0 z-[110] bg-black/60 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white max-w-sm w-full rounded-2xl p-8 shadow-2xl relative text-center space-y-6">
-            <button onclick="closeMemberModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700">
+            <button onclick="closeMemberModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <div class="space-y-2">
@@ -722,13 +737,13 @@
     </div>
 
     <!-- 成功提示 Toast 氣泡 -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:right-10 md:translate-x-0 bg-stone-900 text-white px-6 py-4 rounded-xl shadow-2xl hidden z-[120] flex items-center space-x-3 border border-stone-800">
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:right-10 md:translate-x-0 bg-stone-900 text-white px-6 py-4 rounded-xl shadow-2xl hidden z-[120] items-center space-x-3 border border-stone-800">
         <span id="toast-icon" class="text-amber-400 text-lg">✨</span>
         <span id="toast-text" class="text-sm font-medium">訊息</span>
     </div>
 
     <script>
-        // 全域狀態：購物車與訂單庫 (保存在當前 memory 中)
+        // 全域狀態：購物車與虛擬訂單庫 (保存在 memory 中)
         let cart = [];
         let orderDatabase = [
             // 預設一筆模擬訂單提供測試
@@ -744,22 +759,29 @@
             }
         ];
 
-        // 頁面導航
+        // 頁面導航控制器
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
+            
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
 
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => link.classList.remove('nav-active'));
+            
             const activeLink = document.getElementById('nav-' + pageId);
-            if (activeLink) activeLink.classList.add('nav-active');
+            if (activeLink) {
+                activeLink.classList.add('nav-active');
+            }
 
             toggleMobileMenu(true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 手機版選單切換
+        // 手機版漢堡選單切換
         function toggleMobileMenu(forceClose = false) {
             const menu = document.getElementById('mobile-menu');
             if (forceClose) {
@@ -769,13 +791,15 @@
             }
         }
 
-        // 菜單動態過濾
+        // 菜單過濾
         function filterMenu(category) {
             const tabs = document.querySelectorAll('.category-tab');
             tabs.forEach(tab => tab.classList.remove('active'));
             
-            // 找到點擊的那個按鈕設定 active
-            event.currentTarget.classList.add('active');
+            // 點擊對象設為 Active
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
 
             const items = document.querySelectorAll('.menu-item');
             items.forEach(item => {
@@ -793,7 +817,7 @@
             drawer.classList.toggle('hidden');
         }
 
-        // 加入購物車
+        // 加入購物車項目
         function addToCart(name, price) {
             const existing = cart.find(item => item.name === name);
             if (existing) {
@@ -805,7 +829,7 @@
             showToast('☕ 已加入購物清單，可至購物車查看！');
         }
 
-        // 更新購物車顯示
+        // 更新購物車顯示數據
         function updateCartUI() {
             const cartList = document.getElementById('cart-items-list');
             const cartBadge = document.getElementById('cart-badge');
@@ -817,7 +841,7 @@
             if (cart.length === 0) {
                 cartList.innerHTML = '<p class="text-stone-400 text-sm italic text-center py-12">購物車目前是空的，快去逛逛吧！</p>';
                 checkoutBtn.disabled = true;
-                checkoutBtn.className = "w-full bg-stone-300 text-white font-bold py-4 rounded-xl cursor-not-allowed transition duration-300 text-center tracking-widest";
+                checkoutBtn.className = "w-full bg-stone-300 text-stone-500 font-bold py-4 rounded-xl cursor-not-allowed transition duration-300 text-center tracking-widest";
                 subtotalEl.innerText = "$0";
                 shippingEl.innerText = "$0";
                 totalEl.innerText = "$0";
@@ -825,25 +849,23 @@
                 return;
             }
 
-            // 渲染購物車項目
+            // 渲染列表內容
             cartList.innerHTML = cart.map((item, index) => `
-                <div class="flex justify-between items-center py-3 border-b border-stone-50">
+                <div class="flex justify-between items-center py-3 border-b border-stone-100">
                     <div class="flex-1 pr-4">
                         <p class="text-sm font-bold text-stone-800">${item.name}</p>
                         <p class="text-xs text-stone-400">$${item.price} / 單件</p>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 border border-stone-200 rounded flex items-center justify-center text-xs hover:bg-stone-50">-</button>
+                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 border border-stone-200 rounded flex items-center justify-center text-xs hover:bg-stone-50 focus:outline-none">-</button>
                         <span class="text-sm font-medium w-4 text-center">${item.quantity}</span>
-                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 border border-stone-200 rounded flex items-center justify-center text-xs hover:bg-stone-50">+</button>
+                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 border border-stone-200 rounded flex items-center justify-center text-xs hover:bg-stone-50 focus:outline-none">+</button>
                     </div>
                 </div>
             `).join('');
 
-            // 計算金額
+            // 計算結帳金額
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            // 滿 1500 免運費，否則 160
             const shipping = subtotal >= 1500 ? 0 : 160;
             const total = subtotal + shipping;
             const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -854,10 +876,10 @@
             totalEl.innerText = `$${total}`;
 
             checkoutBtn.disabled = false;
-            checkoutBtn.className = "w-full bg-amber-700 text-white hover:bg-amber-800 font-bold py-4 rounded-xl transition duration-300 text-center tracking-widest shadow";
+            checkoutBtn.className = "w-full bg-amber-700 text-white hover:bg-amber-800 font-bold py-4 rounded-xl transition duration-300 text-center tracking-widest shadow-lg cursor-pointer";
         }
 
-        // 修改數量
+        // 修改購物車數量
         function changeQty(index, amount) {
             cart[index].quantity += amount;
             if (cart[index].quantity <= 0) {
@@ -876,7 +898,7 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         }
 
-        // 處理訂單提交
+        // 處理訂單配送表單提交
         function handleCheckoutSubmit(e) {
             e.preventDefault();
             
@@ -887,12 +909,12 @@
             const shipping = subtotal >= 1500 ? 0 : 160;
             const total = subtotal + shipping;
 
-            // 亂數產生配送編號
+            // 隨機生產配送編號
             const trackingId = "KN-2026-" + Math.floor(10000 + Math.random() * 90000);
             const today = new Date();
             const dateStr = today.getFullYear() + "/" + String(today.getMonth() + 1).padStart(2, '0') + "/" + String(today.getDate()).padStart(2, '0');
 
-            // 儲存於虛擬資料庫
+            // 儲存至虛擬數據庫
             const newOrder = {
                 phone,
                 name,
@@ -911,22 +933,21 @@
             updateCartUI();
             closeCheckoutModal();
 
-            // 引導顧客查看訂單
-            showToast('🎉 訂單已送出並付款完成！');
+            showToast('🎉 訂單已成功送出並完成虛擬付款！');
             
-            // 自動到「宅配訂購」頁並自動將此手機代入查詢欄進行查詢
+            // 自動引導至冷凍宅配頁面，並自動填寫手機以完成查詢
             navigateTo('delivery');
             document.getElementById('query-phone').value = phone;
             searchOrders();
         }
 
-        // 訂單查詢系統
+        // 訂單查詢
         function searchOrders() {
             const phoneInput = document.getElementById('query-phone').value.trim();
             const resultBox = document.getElementById('query-result');
             
             if (!phoneInput) {
-                showToast('⚠️ 請輸入電話號碼再進行查詢！');
+                showToast('⚠️ 請輸入手機號碼再進行查詢！');
                 return;
             }
 
@@ -934,27 +955,27 @@
 
             if (matchedOrders.length === 0) {
                 resultBox.innerHTML = `
-                    <div class="bg-red-50 p-4 rounded-xl border border-red-200 text-red-800">
-                        很抱歉，查無此手機號碼（${phoneInput}）的訂單，請確認輸入是否正確。
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-200 text-red-800 text-sm">
+                        查無此手機號碼（${phoneInput}）的訂單。請確認輸入資訊或先於購物車送出訂單。
                     </div>
                 `;
                 resultBox.classList.remove('hidden');
                 return;
             }
 
-            // 渲染所有查詢到的訂單
+            // 渲染符合該手機號碼的所有訂單
             resultBox.innerHTML = matchedOrders.map(order => `
                 <div class="bg-stone-50 border border-stone-200 p-4 rounded-xl space-y-3 mb-4">
                     <div class="flex justify-between items-center border-b border-stone-200/60 pb-2">
                         <span class="font-bold text-stone-800 text-sm">訂單號：${order.trackingId}</span>
                         <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold">${order.status}</span>
                     </div>
-                    <div class="space-y-1">
+                    <div class="space-y-1 text-stone-600">
                         <p><strong>下單日期：</strong>${order.date}</p>
                         <p><strong>收件人：</strong>${order.name}</p>
                         <p><strong>寄送地址：</strong>${order.address}</p>
-                        <p class="font-bold"><strong>訂購明細：</strong></p>
-                        <ul class="list-disc list-inside pl-1 text-stone-500">
+                        <p class="font-bold text-stone-700"><strong>訂購明細：</strong></p>
+                        <ul class="list-disc list-inside pl-1 text-stone-500 text-xs">
                             ${order.items.map(item => `<li>${item.name} x ${item.quantity} ($${item.price})</li>`).join('')}
                         </ul>
                         <p class="text-sm font-bold text-stone-800 pt-2 border-t border-dashed mt-2">結帳總額：$${order.total}</p>
@@ -963,10 +984,10 @@
             `).join('');
 
             resultBox.classList.remove('hidden');
-            showToast('✅ 已成功更新訂單狀態！');
+            showToast('✅ 訂單狀態更新成功！');
         }
 
-        // 會員登入 Modal
+        // 會員登入相關
         function openMemberModal() {
             document.getElementById('member-modal').classList.remove('hidden');
         }
@@ -992,16 +1013,16 @@
             emailInput.value = "";
         }
 
-        // 聯絡我們
+        // 聯絡我們表單提交
         function handleContactSubmit(e) {
             e.preventDefault();
             document.getElementById('contact-name').value = "";
             document.getElementById('contact-phone').value = "";
             document.getElementById('contact-message').value = "";
-            showToast('📨 訊息已成功傳送！我們會盡快回覆。');
+            showToast('📨 聯絡訊息已成功傳送！我們會盡快回覆您。');
         }
 
-        // 美觀的 Toast 提示
+        // 精美 Toast 提示框架
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastText = document.getElementById('toast-text');
@@ -1015,7 +1036,7 @@
             }, 3000);
         }
 
-        // 初始導航載入首頁
+        // 初始化預設為首頁
         window.onload = () => {
             navigateTo('home');
         };
